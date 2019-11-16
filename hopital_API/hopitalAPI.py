@@ -2,7 +2,9 @@ from flask import Flask, request
 import flask
 import sqlite3 as sq
 from os import path
+import requests
 
+ip = "128.179.134.151:5000"
 app = Flask(__name__)
 
 def get_conn():
@@ -29,8 +31,10 @@ def connect_db():
     return conn
 
 def ask_sophia(genomes, pathogens):
-    
+    dataToSend = {"genomeUNK": genomes, "pathogens": pathogens}
+    return requests.get(ip, json = dataToSend).json()
 
+    
 
 @app.route('/samples', methods=['POST'])
 def add_samples():
@@ -42,7 +46,7 @@ def add_samples():
             execute_file("create_genome.sql", {"seq":gen})
             execute_file("create_room_genome.sql", {"room": room, "genome":gen})
     get_conn().commit()
-    ask_sophia()
+    result = ask_sophia(execute_file("all_genomes.sql",[]), execute_file("all_pathogens.sql",[]))
     return 'OK'
 
 @app.route('/pathogens', methods=['POST'])

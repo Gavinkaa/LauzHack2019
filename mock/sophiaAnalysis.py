@@ -10,7 +10,7 @@ app = Flask(__name__)
 def add_message():
     content = request.get_json()
     unks = content["genomeUNK"]
-    genomes = content["genomes"]
+    genomes = content["pathogens"]
 
     truesIndexes = []
 
