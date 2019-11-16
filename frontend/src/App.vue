@@ -10,11 +10,13 @@
       <input v-model="room" />
     </div>
     <button v-on:click="create">Create</button>
+    <button v-on:click="connect">Connect</button>
   </div>
 </template>
 
 <script>
 import Alert from './components/Alert';
+import { connect } from './socket';
 
 export default {
   name: 'app',
@@ -28,6 +30,10 @@ export default {
     create() {
       this.alerts.push({ pathogen: this.pathogen, room: this.room });
     },
+
+    connect() {
+      connect();
+    }
   },
 };
 </script>
