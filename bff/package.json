@@ -1,0 +1,13 @@
+{
+  "name": "bff",
+  "version": "0.1.0",
+  "description": "Serves the frontend web application",
+  "main": "src/index.js",
+  "scripts": {
+    "run": "node src/index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
