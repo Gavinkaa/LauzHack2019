@@ -1,34 +1,35 @@
 <template>
-  <div id="app">
-    <div v-if="!connection">
-      <h3>Hospital:</h3>
-      <input v-model="hospital" />
-      <button v-on:click="connect">Connect</button>
+  <div id="app" class="h-screen bg-gray-200 p-12">
+    <div v-if="$router.currentRoute.name !== 'Login'">
+      <h2>Nav Bar</h2>
+      <nav>
+        <router-link to="/alerts">Alert Vue</router-link>
+        <router-link to="/maps">Maps</router-link>
+        <router-link to="/rooms">Rooms</router-link>
+      </nav>
     </div>
-    <Alert v-for="{pathogen, item} of alerts" :key="pathogen" :pathogen="pathogen" :item="item" />
+    <router-view v-on:join="newHospital" v-bind:alerts="alerts"></router-view>
   </div>
 </template>
 
 <script>
-import Alert from './components/Alert';
 import Connection from './Connection';
 
 export default {
-  name: 'app',
-  components: {
-    Alert,
-  },
+  name: 'App',
   data() {
-    return { connection: undefined, hospital: '', alerts: [] };
+    return { connection: undefined, alerts: [] };
   },
   methods: {
-    connect() {
-      this.connection = new Connection(this.hospital);
+    newHospital(hospital) {
+      this.$root.connected = true;
+      this.connection = new Connection(hospital);
       this.connection.onAlert(details => this.alerts.push(details));
+      this.$router.push({ path: '/alerts' });
     },
   },
 };
 </script>
 
-<style>
+<style src="./assets/css/tailwind.css">
 </style>
