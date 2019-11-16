@@ -21,5 +21,5 @@ websocat ws://this/connect?hospital=BC
 
 We use socket.io, so events look like this:
 ```
-socket.on('alert', {pathogen: 'Evil', room: 'BC010'});
+{type: 'alert', {pathogen: 'Evil', room: 'BC010'}};
 ```

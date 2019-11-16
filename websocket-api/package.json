@@ -1,0 +1,19 @@
+{
+  "name": "sophia-websocket-api",
+  "version": "0.1.0",
+  "description": "A websocket API for hospital alerts",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "author": "Lúcás Meier, Kajetan Pyszkowski, Ludovic Burnier, Pierre Colson",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-ws": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.1"
+  }
+}
