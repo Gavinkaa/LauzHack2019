@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-red-700">
     <div v-if="!connection">
-      <h3>Hospital:</h3>
+      <h3 class="bg-red text-blue">Hospital:</h3>
       <input v-model="hospital" />
       <button v-on:click="connect">Connect</button>
     </div>
@@ -14,7 +14,7 @@ import Alert from './components/Alert';
 import Connection from './Connection';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     Alert,
   },
@@ -30,5 +30,5 @@ export default {
 };
 </script>
 
-<style>
+<style src="./assets/css/tailwind.css">
 </style>
