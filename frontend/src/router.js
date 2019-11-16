@@ -7,8 +7,7 @@ import Alerts from './components/Alerts.vue'
 
 Vue.use(Router)
 
-
-export default new Router({
+const router = new Router({
     routes: [
         {
             path: '/',
@@ -35,4 +34,15 @@ export default new Router({
             component: Maps
         }
     ]
+});
+
+
+router.beforeEach((to, from, next) => {
+    if (router.app.connected === false && to.name !== 'Login') {
+        next('/login')
+    } else {
+        next()
+    }
 })
+
+export default router;

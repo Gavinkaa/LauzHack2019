@@ -22,6 +22,7 @@ export default {
   },
   methods: {
     newHospital(hospital) {
+      this.$root.connected = true;
       this.connection = new Connection(hospital);
       this.connection.onAlert(details => this.alerts.push(details));
       this.$router.push({ path: '/alerts' });
