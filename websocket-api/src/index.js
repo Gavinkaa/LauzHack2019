@@ -1,8 +1,11 @@
 const app = require('express')();
+require('express-ws')(app);
 const port = 1234;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+app.ws('/join', (ws, req) => {
+  ws.on('message', msg => {
+    ws.send(msg);
+  });
 });
 
 app.listen(port, () => {
