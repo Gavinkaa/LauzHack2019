@@ -2,6 +2,11 @@
     "genomeUNK": "abc",
     "genomes": [
         "abc",
-        "cde"
+        "cde",
+        "abc",
+        "EFWFWFW",
+        "ABC",
+        "abcer",
+        "abc"
     ]
 }
