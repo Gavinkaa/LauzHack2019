@@ -26,6 +26,16 @@ class SocketHolder {
     }
   }
 
+  sendToHospital(hospital, data) {
+    const sockets = this.hospitalSockets.get(hospital);
+    if (sockets) {
+      for (const ws of sockets.values()) {
+        ws.send(data);
+      }
+    }
+    return 'Ok'
+  }
+
   print() {
     const m = new Map();
     for (const [hospital, map] of this.hospitalSockets.entries()) {

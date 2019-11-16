@@ -19,7 +19,7 @@ websocat ws://this/join?hospital=BC
 
 ### Events
 
-We use socket.io, so events look like this:
+We use websockets, so events look like this:
 ```
 {type: 'alert', {pathogen: 'Evil', room: 'BC010'}};
 ```
