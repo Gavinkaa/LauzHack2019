@@ -10,7 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "express-ws": "^4.0.0"
+    "express-ws": "^4.0.0",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "nodemon": "^1.19.4",

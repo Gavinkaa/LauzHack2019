@@ -1,16 +1,16 @@
 const app = require('express')();
 require('express-ws')(app);
+const SocketHolder = require('./SocketHolder.js');
+
 const port = 1234;
 
-const hospitalSockets = new Map();
+const holder = new SocketHolder();
 
 app.ws('/join', (ws, req) => {
   const hospital = req.query.hospital;
-  console.log(`Adding hospital ${hospital}`);
-  hospitalSockets.set(hospital, ws);
+  const client = holder.add(hospital, ws);
   ws.on('close', msg => {
-    console.log(`Removing hosptial ${hospital}`);
-    hospitalSockets.delete(hospital);
+    holder.remove(hospital, client);
   });
   ws.on('message', msg => {
     ws.send(msg);
