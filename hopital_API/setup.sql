@@ -1,26 +1,26 @@
 CREATE TABLE Hospitals (
-    id INTEGER PRIMARY KEY, 
+    id INTEGER PRIMARY KEY,
     n TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE Rooms (
     id INTEGER PRIMARY KEY,
-    hospitalID INTEGER NOT NULL, 
+    hospitalID INTEGER NOT NULL,
     n TEXT UNIQUE NOT NULL,
     FOREIGN KEY (hospitalID) REFERENCES hospitals(hospitalID)
 );
 
 CREATE TABLE Genomes (
-    id INTEGER PRIMARY KEY, 
-    sequence TEXT UNIQUE NOT NULL
+    id INTEGER PRIMARY KEY,
+    seq TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE Pathogen (
-    id INTEGER PRIMARY KEY, 
-    sequence TEXT UNIQUE NOT NULL
+CREATE TABLE Pathogens (
+    id INTEGER PRIMARY KEY,
+    seq TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE GenomesMatchPathogen (
+CREATE TABLE GenomesMatchPathogens (
     genomeID INTEGER NOT NULL,
     pathogenID INTEGER NOT NULL,
     PRIMARY KEY (genomeID, pathogenID),

@@ -1,6 +1,6 @@
 {
-    "hopital": "BCA",
-    "room": {
+    "hospital": "BCA",
+    "rooms": {
         "001":["abd"],
         "002":["def", "hij"],
         "314":["bonjour"]
