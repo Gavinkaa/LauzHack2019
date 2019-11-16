@@ -1,3 +1,5 @@
+# Visualization
+![](IMG_1530.jpg | width = 300)
 # First Steps
 These are the first things we need to accomplish.
 
