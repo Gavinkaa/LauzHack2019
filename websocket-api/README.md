@@ -11,8 +11,8 @@ pathogen in a room.
 {
   "hospital": "BC",
   "samples": [
-    { "pathogen": "AABBBB", "hospital": "BC", "room": "BC020" },
-    { "pathogen": "BBAAA", "hospital": "BC", "room": "BC021" }
+    { "pathogen": "AABBBB", "room": "BC020" },
+    { "pathogen": "BBAAA", "room": "BC021" }
   ]
 }
 ```
