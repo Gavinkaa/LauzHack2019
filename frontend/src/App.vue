@@ -1,14 +1,18 @@
 <template>
-  <div id="app" class="h-screen bg-gray-200 p-12">
+  <div>
     <div v-if="$router.currentRoute.name !== 'Login'">
-      <h2>Nav Bar</h2>
-      <nav>
-        <router-link to="/alerts">Alert Vue</router-link>
-        <router-link to="/maps">Maps</router-link>
-        <router-link to="/rooms">Rooms</router-link>
-      </nav>
+      <div class="bg-blue-600 text-white p-4">
+        <nav class="text-center">
+          <router-link class="px-10 uppercase text-xl font-semibold" to="/alerts">Alerts</router-link>
+          <router-link class="px-10 uppercase text-xl font-semibold" to="/maps">Maps</router-link>
+          <router-link class="px-10 uppercase text-xl font-semibold" to="/rooms">Rooms</router-link>
+        </nav>
+      </div>
     </div>
-    <router-view v-on:join="newHospital" v-bind:alerts="alerts"></router-view>
+
+    <div id="app" class="h-screen bg-gray-200 p-12">
+      <router-view v-on:join="newHospital" v-bind:alerts="alerts"></router-view>
+    </div>
   </div>
 </template>
 
