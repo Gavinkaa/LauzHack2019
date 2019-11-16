@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="h-screen m-0 bg-gray-200 p-12">
-    <div v-if="!connection" class="bg-white rounded-lg w-1/4 p-8 shadow-lg">
+    <div v-if="!connection" class="bg-white rounded-lg w-full md:w-1/2 lg:w-1/4 p-8 shadow-lg">
       <h3 class="text-2xl font-bold">Hospital Name:</h3>
       <div class="h-1/2">
         <input class="h-full text-base p-2 my-4 border rounded shadow" v-model="hospital" />
@@ -10,7 +10,9 @@
         v-on:click="connect"
       >Connect</button>
     </div>
-    <Alert v-for="{pathogen, item} of alerts" :key="pathogen" :pathogen="pathogen" :item="item" />
+    <div class="text-center">
+      <Alert v-for="{pathogen, room} of alerts" :key="pathogen" :pathogen="pathogen" :room="room" />
+    </div>
   </div>
 </template>
 
