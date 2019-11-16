@@ -1,25 +1,34 @@
 <template>
   <div id="app">
-    <div>{{ message }}</div>
+    <Alert v-for="{pathogen, item} of alerts" :key="pathogen" :pathogen="pathogen" :item="item" />
     <div>
-      <input v-model="message" />
+      <h3>Pathogen:</h3>
+      <input v-model="pathogen" />
     </div>
-    <h>Reversed</h>
-    <div>{{ reverseMessage }}</div>
+    <div>
+      <h3>Room:</h3>
+      <input v-model="room" />
+    </div>
+    <button v-on:click="create">Create</button>
   </div>
 </template>
 
 <script>
+import Alert from './components/Alert';
+
 export default {
   name: 'app',
-  data() {
-    return { message: 'Hello!' };
+  components: {
+    Alert,
   },
-  computed: {
-    reverseMessage() {
-      return this.message + 'Lol';
-    }
-  }
+  data() {
+    return { pathogen: '', room: '', alerts: [] };
+  },
+  methods: {
+    create() {
+      this.alerts.push({ pathogen: this.pathogen, room: this.room });
+    },
+  },
 };
 </script>
 
