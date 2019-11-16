@@ -22,15 +22,20 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def add_message():
+    conn = sq.connect("database.db")
+    cursor = conn.cursor()
     args = request.get_json()
     hopital = args["hopital"]
     roomsWithGenome = args["room"]
     #Put hopital in the table
     #a = executeFile("insert.sql", conn.cursor(), hopital)
+    print(hopital)
     with open("insert.sql", 'r') as file:
         data = file.read().replace('\n', '').split(";")
     for line in data:
-        cursor.execute(line, hopital)
-    return cursor.fetchone()
+        print(line)
+        cursor.execute(line, (hopital,))
+
+    return 'OK'
 
 app.run("0.0.0.0")
