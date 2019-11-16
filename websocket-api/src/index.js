@@ -10,10 +10,13 @@ const port = 1234;
 const holder = new SocketHolder();
 
 app.post('/alert', (req, res) => {
-  const { pathogen, hospital, room } = req.body;
-  const data = JSON.stringify({ type: 'alert', details: { pathogen, room } });
-  const result = holder.sendToHospital(hospital, data);
-  res.send(result);
+  console.log(req.body);
+  const { hospital, samples } = req.body;
+  for (const { pathogen, room } of samples) {
+    const data = JSON.stringify({ type: 'alert', details: { pathogen, room } });
+    holder.sendToHospital(hospital, data);
+  }
+  res.send('OK');
 });
 
 app.ws('/join', (ws, req) => {
