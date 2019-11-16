@@ -1,5 +1,8 @@
 {
-    "genomeUNK": "abc",
+    "genomeUNK": [
+        "abc",
+        "cde"
+    ],
     "genomes": [
         "abc",
         "cde",
