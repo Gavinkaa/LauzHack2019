@@ -13,9 +13,10 @@ def executeFile(pathToFile, cursor, params):
         cursor.execute(line, params)
     return cursor.fetchall()
 
-conn = sq.connect("database.db")
-cursor = conn.cursor()
-if not path.exists("database.db"):    
+create_database = not path.exists("database.db")
+conn = sq.connect("database.db") 
+cursor = conn.cursor()   
+if create_database:
     executeFile("setup.sql", cursor, [])
     
 app = Flask(__name__)
@@ -34,8 +35,8 @@ def add_message():
         data = file.read().replace('\n', '').split(";")
     for line in data:
         print(line)
-        cursor.execute(line, (hopital,))
-
+        cursor.execute(line, [hopital])
+        conn.commit()
     return 'OK'
 
 app.run("0.0.0.0")

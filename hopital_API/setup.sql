@@ -1,12 +1,12 @@
 CREATE TABLE Hospitals (
     id INTEGER PRIMARY KEY, 
-    name TEXT UNIQUE NOT NULL
+    n TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE Rooms (
     id INTEGER PRIMARY KEY,
     hospitalID INTEGER NOT NULL, 
-    name TEXT UNIQUE NOT NULL,
+    n TEXT UNIQUE NOT NULL,
     FOREIGN KEY (hospitalID) REFERENCES hospitals(hospitalID)
 );
 
