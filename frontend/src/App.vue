@@ -1,22 +1,17 @@
 <template>
   <div id="app">
+    <div v-if="!connection">
+      <h3>Hospital:</h3>
+      <input v-model="hospital" />
+      <button v-on:click="connect">Connect</button>
+    </div>
     <Alert v-for="{pathogen, item} of alerts" :key="pathogen" :pathogen="pathogen" :item="item" />
-    <div>
-      <h3>Pathogen:</h3>
-      <input v-model="pathogen" />
-    </div>
-    <div>
-      <h3>Room:</h3>
-      <input v-model="room" />
-    </div>
-    <button v-on:click="create">Create</button>
-    <button v-on:click="connect">Connect</button>
   </div>
 </template>
 
 <script>
 import Alert from './components/Alert';
-import { connect } from './socket';
+import Connection from './Connection';
 
 export default {
   name: 'app',
@@ -24,16 +19,13 @@ export default {
     Alert,
   },
   data() {
-    return { pathogen: '', room: '', alerts: [] };
+    return { connection: undefined, hospital: '', alerts: [] };
   },
   methods: {
-    create() {
-      this.alerts.push({ pathogen: this.pathogen, room: this.room });
-    },
-
     connect() {
-      connect();
-    }
+      this.connection = new Connection(this.hospital);
+      this.connection.onAlert(details => this.alerts.push(details));
+    },
   },
 };
 </script>

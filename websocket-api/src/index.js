@@ -19,6 +19,7 @@ app.post('/alert', (req, res) => {
 app.ws('/join', (ws, req) => {
   const hospital = req.query.hospital;
   const client = holder.add(hospital, ws);
+  console.log('join', hospital, client);
   ws.on('close', msg => {
     holder.remove(hospital, client);
   });
