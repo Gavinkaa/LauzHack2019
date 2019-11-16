@@ -14,7 +14,7 @@ http POST /alert pathogen=Evil room=BC010 hospital=BC
 ### Connect to the Websocket
 
 ```
-websocat ws://this/connect?hospital=BC
+websocat ws://this/join?hospital=BC
 ```
 
 ### Events
