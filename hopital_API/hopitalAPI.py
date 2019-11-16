@@ -47,6 +47,9 @@ def add_samples():
             execute_file("create_room_genome.sql", {"room": room, "genome":gen})
     get_conn().commit()
     result = ask_sophia(execute_file("all_genomes.sql",[]), execute_file("all_pathogens.sql",[]))
+    for res, gen in zip(result, json["rooms"].values()):
+        for pathogen in res:
+            execute_file("create_match.sql", {"genome": gen, "pathogen": pathogen})
     return 'OK'
 
 @app.route('/pathogens', methods=['POST'])
