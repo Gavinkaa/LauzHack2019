@@ -3,9 +3,10 @@ from flask import request
 
 app = Flask(__name__)
 
-
-@app.route('/', methods=['POST'])
-def main():
-    json_data = request.get_json()
-    print(json_data["genomeUNK"])
-    return True
+@app.route('/', methods=['GET'])
+def add_message():
+    content = request.get_json()
+    print(content)
+    genome1 = content["genomeUNK"]
+    print (genome1)
+    return genome1
