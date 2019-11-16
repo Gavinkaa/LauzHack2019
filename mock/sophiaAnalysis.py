@@ -23,3 +23,5 @@ def add_message():
         truesIndexes.append(temp)
 
     return jsonify(truesIndexes)
+
+app.run ("0.0.0.0")
