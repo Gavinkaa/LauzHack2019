@@ -4,9 +4,8 @@ from flask import request
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['POST'])
 def main():
-    args = request.args
-    a = args["genomeUNK"]
-    b = args["genome1"]
-    return str(a == b)
+    json_data = request.get_json()
+    print(json_data["genomeUNK"])
+    return True
