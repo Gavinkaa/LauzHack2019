@@ -1,0 +1,5 @@
+{
+    "dromadaire":["GGCTAGGGCCCT", 0],
+    "animal": ["GGCT", 1],
+    "human":["ACGT", 0]
+}
