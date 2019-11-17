@@ -12,6 +12,8 @@
     <div id="app" class="h-screen bg-gray-200 p-12">
       <router-view v-on:join="newHospital" v-bind:alerts="alerts"></router-view>
     </div>
+    <img src="@/assets/BC.png" hidden>
+    <img src="@/assets/virus.png" hidden>
   </div>
 </template>
 

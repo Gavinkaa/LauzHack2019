@@ -32,6 +32,8 @@ export default {
       { room: 'BC09', x: 106, y: 2 },
       { room: 'BC010', x: 50, y: 2 },
     ];
+    const bcimage = new Image();
+    bcimage.src = bc;
     return {
       configKonva: {
         width: 600,
@@ -42,7 +44,7 @@ export default {
         y: 0,
         width: 4 * 100,
         height: 4 * 153,
-        image: new Image(),
+        image: bcimage,
       },
       viruses: rooms.map(({ room, x, y }) => {
         return {
@@ -62,7 +64,6 @@ export default {
     }
   },
   mounted() {
-    this.configBC.image.src = bc;
     for (const v of this.viruses) {
       v.image.src = virus;
     }

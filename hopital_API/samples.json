@@ -1,9 +1,9 @@
 {
     "hospital": "BC",
     "rooms": {
-        "001":["gen1"],
-        "002":["gen2", "gen3"],
-        "003":["gen2", "gen4"], 
-        "004":["gen5"]
+        "BC01": ["GGCTAGCCT"],
+        "BC02": ["GGCTAGG", "ACGT"],
+        "BC03": ["GGCTAG", "ACGT"],
+        "BC04": ["ACG"]
     }
  }
