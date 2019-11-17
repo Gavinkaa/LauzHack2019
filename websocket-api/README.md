@@ -5,8 +5,20 @@
 This will tell this service to create a new alert for a given hospital, warning about a specific
 pathogen in a room.
 
+`data.json`:
+
 ```
-http POST /alert pathogen=Evil room=BC010 hospital=BC
+{
+  "hospital": "BC",
+  "samples": [
+    { "pathogen": "AABBBB", "room": "BC020" },
+    { "pathogen": "BBAAA", "room": "BC021" }
+  ]
+}
+```
+
+```
+http POST /alert < data.json
 ```
 
 ## Websocket API
@@ -20,6 +32,7 @@ websocat ws://this/join?hospital=BC
 ### Events
 
 We use websockets, so events look like this:
+
 ```
 {type: 'alert', {pathogen: 'Evil', room: 'BC010'}};
 ```
