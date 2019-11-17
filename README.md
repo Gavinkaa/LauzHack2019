@@ -28,3 +28,7 @@ This gives real time feedback to the frontend about alerts and whatnot.
 
 This will need to use a javascript UI of some kind (Vue). This will present information about the pathogens present and their spread across the Hospital.
 
+-IP 
+Mock sophia 6000
+WS 1234
+HopitalAPI 5000
