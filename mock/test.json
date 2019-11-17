@@ -1,15 +1,1 @@
-{
-    "genomeUNK": [
-        "abc",
-        "cde"
-    ],
-    "pathogens": [
-        "abc",
-        "cde",
-        "abc",
-        "EFWFWFW",
-        "ABC",
-        "abcer",
-        "abc"
-    ]
-}
+["gen1", "gen2", "gen3"]
