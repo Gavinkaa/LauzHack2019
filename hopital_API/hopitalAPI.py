@@ -70,8 +70,8 @@ def update_matches():
     commit()
 
 
-def is_dangerous(gen):
-    return len(execute_file("sql/is_dangerous.sql", {"gen": gen, "depth": ALERT_DEPTH})) != 0
+def dangerous_species(gen):
+    return (str(item[0]) for item in execute_file("sql/dangerous_species.sql", {"gen": gen, "depth": ALERT_DEPTH}))
 
 
 @app.route('/samples', methods=['POST'])
@@ -92,8 +92,8 @@ def add_samples():
     newPathogens = []
     for room, genomes in json["rooms"].items():
         for gen in genomes:
-            if is_dangerous(gen):
-                newPathogens.append({"pathogen": gen, "room": room})
+            for name in dangerous_species(gen):
+                newPathogens.append({"pathogen": name, "room": room})
     ret = {"hospital": json["hospital"], "samples": newPathogens}
     requests.post(WS_API + "/alert", json=ret)
     return "OK add sample"
