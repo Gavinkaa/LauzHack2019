@@ -15,17 +15,19 @@ CREATE TABLE Genomes (
     seq TEXT UNIQUE NOT NULL
 );
 
-CREATE TABLE Pathogens (
+CREATE TABLE Species (
     id INTEGER PRIMARY KEY,
-    seq TEXT UNIQUE NOT NULL
+    n TEXT UNIQUE NOT NULL,
+    dangerous INTEGER NOT NULL,
+    depth INTEGER NOT NULL
 );
 
-CREATE TABLE GenomesMatchPathogens (
+CREATE TABLE GenomesMatchSpecies (
     genomeID INTEGER NOT NULL,
-    pathogenID INTEGER NOT NULL,
-    PRIMARY KEY (genomeID, pathogenID),
-    FOREIGN KEY (genomeID) REFERENCES genomes(genomeID),
-    FOREIGN KEY (pathogenID) REFERENCES pathogen(pathogenID)
+    speciesID INTEGER NOT NULL,
+    PRIMARY KEY (genomeID, speciesID),
+    FOREIGN KEY (genomeID) REFERENCES Genomes(genomeID),
+    FOREIGN KEY (speciesID) REFERENCES Species(pathogenID)
 );
 
 CREATE TABLE GenomeRoom (

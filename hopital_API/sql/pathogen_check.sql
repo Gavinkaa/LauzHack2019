@@ -1,1 +1,0 @@
-SELECT 1 WHERE EXISTS (SELECT 1 FROM Genomes INNER JOIN GenomesMatchPathogens ON Genomes.id=GenomesMatchPathogens.genomeID WHERE Genomes.seq=:gen);
