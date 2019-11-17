@@ -1,0 +1,1 @@
+SELECT seq from Pathogens;

@@ -10,7 +10,7 @@ app = Flask(__name__)
 def add_message():
     content = request.get_json()
     unks = content["genomeUNK"]
-    genomes = content["genomes"]
+    genomes = content["pathogens"]
 
     truesIndexes = []
 
@@ -23,3 +23,5 @@ def add_message():
         truesIndexes.append(temp)
 
     return jsonify(truesIndexes)
+
+app.run ("0.0.0.0", port=5001)

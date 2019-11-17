@@ -1,0 +1,1 @@
+SELECT seq FROM Genomes;
