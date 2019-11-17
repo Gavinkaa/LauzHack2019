@@ -1,7 +1,7 @@
 {
   "hospital": "BC",
   "samples": [
-    { "pathogen": "AABBBB", "room": "BC07" },
-    { "pathogen": "BBAAA", "room": "BC09" }
+    { "pathogen": "AABBBB", "room": "BC01" },
+    { "pathogen": "BBAAA", "room": "BC02" }
   ]
 }

@@ -13,14 +13,25 @@
         <autocomplete :search="search" placeholder="input" @submit="handleSubmit"></autocomplete>
       </div>
     </div>
-    <Alert
-      v-for="({pathogen, room}, index) in filtered"
-      :key="index"
-      :pathogen="pathogen"
-      :room="room"
-    />
+    <transition-group name="fade">
+      <Alert
+        v-for="{pathogen, room} of filtered"
+        :key="pathogen + room"
+        :pathogen="pathogen"
+        :room="room"
+      />
+    </transition-group>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>
 
 <script>
 import Alert from './Alert';
@@ -72,7 +83,8 @@ export default {
         const lowered = this.typeselect['name'].toLowerCase();
         if (lowered === 'room') {
           return (
-            notFiltering(this.select) || x.room.toLowerCase() === this.select.toLowerCase()
+            notFiltering(this.select) ||
+            x.room.toLowerCase() === this.select.toLowerCase()
           );
         } else if (lowered === 'pathogen') {
           return (
