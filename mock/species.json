@@ -1,5 +1,14 @@
 {
-    "dromadaire":["GGCTAGGGCCCT", 0],
-    "animal": ["GGCT", 1],
-    "human":["ACGT", 0]
+    "animal":   ["ACTG", 0],
+    "plant":    ["GTCA", 0],
+    "mammal":   ["ACTGAC", 0],
+    "bird":     ["ACTGTG", 0],
+    "crocodile":["ACTGACAC", 1],
+    "dog":      ["ACTGACTG", 0],
+    "eagle":    ["ACTGTGAC", 1],
+    "pigeon":   ["ACTGACTG", 0],
+    "tree":     ["GTCAGTAC", 0],
+    "mushroom": ["GTCAACAC", 1],
+    "shark":    ["ACTGACCA", 1],
+    "lama":     ["ACTGACGT", 1]
 }
