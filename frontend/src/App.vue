@@ -2,10 +2,9 @@
   <div>
     <div v-if="$router.currentRoute.name !== 'Login'">
       <div class="bg-blue-600 text-white p-4">
-        <nav class="text-center">
+        <nav class="">
           <router-link class="px-10 uppercase text-xl font-semibold" to="/alerts">Alerts</router-link>
           <router-link class="px-10 uppercase text-xl font-semibold" to="/maps">Maps</router-link>
-          <router-link class="px-10 uppercase text-xl font-semibold" to="/rooms">Rooms</router-link>
         </nav>
       </div>
     </div>

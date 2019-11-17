@@ -1,16 +1,15 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 const vue = new Vue({
   router,
   data: {
-    connected: false
+    connected: false,
   },
   render: h => h(App),
-})
+});
 
-
-vue.$mount('#app')
+vue.$mount('#app');
