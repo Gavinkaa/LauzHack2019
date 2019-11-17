@@ -44,7 +44,6 @@ def find_prefix(root, prefix):
         for child in node.children:
             if child.char == char:
                 if node.specie != None:
-                    print("changing to : ", node.specie)
                     parentsSpecie = node.specie
                 parentsDang = node.danger
                 char_not_found = False
