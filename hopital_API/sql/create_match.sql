@@ -1,8 +1,8 @@
-INSERT INTO GenomesMatchPathogens
-SELECT Genomes.id, Pathogens.id
-FROM Genomes INNER JOIN Pathogens
-ON Genomes.seq=:genome AND Pathogens.seq=:pathogen
+INSERT INTO GenomesMatchSpecies
+SELECT Genomes.id, Species.id
+FROM Genomes INNER JOIN Species
+ON Genomes.seq=:gen AND Species.n=:species
 WHERE NOT EXISTS
-(SELECT 1 FROM GenomesMatchPathogens WHERE
-genomeID=Genomes.id AND pathogenID=Pathogens.id
+(SELECT 1 FROM GenomesMatchSpecies WHERE
+genomeID=Genomes.id AND speciesID=Species.id
 );
