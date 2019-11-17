@@ -4,7 +4,8 @@ import sqlite3 as sq
 from os import path
 import requests
 
-toConnect = "http://128.179.134.151:5000"
+MOCK_API = "http://128.179.134.151:5000"
+WS_API = "http://128.179.186.221:1234"
 app = Flask(__name__)
 
 
@@ -14,13 +15,17 @@ def get_conn():
     return flask.g.sqlite_db
 
 
+def commit():
+    get_conn().commit()
+
+
 def execute_setup():
-    data = None
     conn = get_conn()
     c = conn.cursor()
+    data = None
     with open("sql/setup.sql", 'r') as file:
         data = file.read().split(";")
-    for line in data[:len(data)-1]:
+    for line in data[:-1]:
         c.execute(line)
     conn.commit()
 
@@ -47,7 +52,7 @@ def ask_sophia(genomes, pathogens):
     genomes = [item[0] for item in genomes]
     pathogens = [item[0] for item in pathogens]
     dataToSend = {"genomeUNK": genomes, "pathogens": pathogens}
-    return requests.get(toConnect, json=dataToSend).json()
+    return requests.get(MOCK_API, json=dataToSend).json()
 
 
 def update_matches():
@@ -62,7 +67,7 @@ def update_matches():
             pathogen = allPathogens[indexPathogen]
             execute_file("sql/create_match.sql",
                          {"genome": gen, "pathogen": pathogen})
-    get_conn().commit()
+    commit()
 
 
 def is_pathogen(gen):
@@ -78,11 +83,11 @@ def add_samples():
                      {"room": room, "hospital": json["hospital"]})
         for gen in genomes:
             execute_file("sql/create_genome.sql", {"seq": gen})
-        get_conn().commit()
+        commit()
         for gen in genomes:
             execute_file("sql/create_room_genome.sql",
                          {"room": room, "genome": gen})
-    get_conn().commit()
+    commit()
     update_matches()
     newPathogens = []
     for room, genomes in json["rooms"].items():
@@ -90,9 +95,8 @@ def add_samples():
             if is_pathogen(gen):
                 newPathogens.append({"pathogen": gen, "room": room})
     ret = {"hospital": json["hospital"], "samples": newPathogens}
-    print(ret)
-    requests.post("http://128.179.186.221:1234/alert", json=ret)
-    return 'OK add sample'
+    requests.post(WS_API + "/alert", json=ret)
+    return "OK add sample"
 
 
 @app.route('/pathogens', methods=['POST'])
@@ -100,9 +104,9 @@ def add_pathogens():
     json = request.get_json()
     for pathogen in json:
         execute_file("sql/create_pathogen.sql", {"pathogen": pathogen})
-    get_conn().commit()
+    commit()
     update_matches()
-    return 'ok add pathogens'
+    return "OK add pathogens"
 
 
 app.run("0.0.0.0")
