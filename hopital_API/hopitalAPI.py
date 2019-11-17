@@ -4,7 +4,7 @@ import sqlite3 as sq
 from os import path
 import requests
 
-MOCK_API = "http://128.179.134.151:5000"
+MOCK_API = "http://localhost:5001"
 WS_API = "http://128.179.186.221:1234"
 ALERT_DEPTH = 4
 app = Flask(__name__)
@@ -50,9 +50,12 @@ def execute_file(path, params):
 
 
 def ask_sophia(genomes):
-    # requests.get(MOCK_API, json=dataToSend).json()
+    # requests.get(MOCK_API, json=genomes).json()
     return [
         {"name": "HIV", "dangerous": 1, "depth": 22},
+        {"name": "CANCER", "dangerous": 1, "depth": 47},
+        {"name": "VIRUS", "dangerous": 1, "depth": 30},
+        {"name": "PLANTE", "dangerous": 0, "depth": 6},
         {"name": "Human", "dangerous": 0, "depth": 16}
     ][:len(genomes)]
 
@@ -90,11 +93,27 @@ def add_samples():
     commit()
     update_matches()
     newPathogens = []
+    numberRooms = len(json["rooms"])
     for room, genomes in json["rooms"].items():
         for gen in genomes:
             for name in dangerous_species(gen):
                 newPathogens.append({"pathogen": name, "room": room})
-    ret = {"hospital": json["hospital"], "samples": newPathogens}
+    ret = {"hospital": json["hospital"], "samples": newPathogens, "type": "alert"}
+    dic = {}
+    dicRoom = {} 
+    for s in ret["samples"]:
+        if s["pathogen"] in dic.keys():
+            dic[s["pathogen"]] += 1
+            dicRoom[s["pathogen"]].append(s["room"])
+        else:
+            dic[s["pathogen"]] = 1
+            a = s["room"]
+            dicRoom[s["pathogen"]] = [a]
+    for k, number in dic.items():
+        pourcetage = number/numberRooms * 100
+        if pourcetage >= 75:
+            ret = {"hospital": json["hospital"], "rooms": dicRoom[k], "pathogen": k, "type": "outbreak"}
+    print ("ret = " + str(ret))
     requests.post(WS_API + "/alert", json=ret)
     return "OK add sample"
 
