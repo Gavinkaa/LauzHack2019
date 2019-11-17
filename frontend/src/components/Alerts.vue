@@ -15,8 +15,8 @@
     </div>
     <transition-group name="fade">
       <Alert
-        v-for="{pathogen, room} of filtered"
-        :key="pathogen + room"
+        v-for="{pathogen, room, i} of filtered"
+        :key="i"
         :pathogen="pathogen"
         :room="room"
       />
@@ -25,10 +25,10 @@
 </template>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active {
   transition: opacity .5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 </style>

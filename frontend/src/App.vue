@@ -21,13 +21,17 @@ import Connection from './Connection';
 export default {
   name: 'App',
   data() {
-    return { connection: undefined, alerts: [] };
+    return { connection: undefined, alerts: [], i: 0 };
   },
   methods: {
     newHospital(hospital) {
       this.$root.connected = true;
       this.connection = new Connection(hospital);
-      this.connection.onAlert(details => this.alerts.unshift(details));
+      this.connection.onAlert(details => {
+        this.i += 1;
+        this.alerts = this.alerts.filter(a => a.pathogen !== details.pathogen && a.room !== details.room);
+        this.alerts.unshift({...details, i: this.i })
+      });
       this.$router.push({ path: '/alerts' });
     },
   },
