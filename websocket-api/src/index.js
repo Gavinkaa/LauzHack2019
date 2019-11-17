@@ -11,6 +11,9 @@ const holder = new SocketHolder();
 
 app.post('/alert', (req, res) => {
   console.log(req.body);
+  if (req.body.type === 'outbreak') {
+    return;
+  }
   const { hospital, samples } = req.body;
   for (const { pathogen, room } of samples) {
     const data = JSON.stringify({ type: 'alert', details: { pathogen, room } });
