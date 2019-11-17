@@ -27,6 +27,10 @@ import Alert from './Alert';
 import dropdown from 'vue-dropdowns';
 import Autocomplete from '@trevoreyre/autocomplete-vue';
 
+function notFiltering(thing) {
+  return !thing || thing === '';
+}
+
 export default {
   name: 'Alerts',
   components: {
@@ -68,11 +72,11 @@ export default {
         const lowered = this.typeselect['name'].toLowerCase();
         if (lowered === 'room') {
           return (
-            !this.select || x.room.toLowerCase() === this.select.toLowerCase()
+            notFiltering(this.select) || x.room.toLowerCase() === this.select.toLowerCase()
           );
         } else if (lowered === 'pathogen') {
           return (
-            !this.select ||
+            notFiltering(this.select) ||
             x.pathogen.toLowerCase() === this.select.toLowerCase()
           );
         } else {
