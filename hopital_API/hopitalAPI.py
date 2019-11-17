@@ -4,8 +4,8 @@ import sqlite3 as sq
 from os import path
 import requests
 
-MOCK_API = "http://localhost:5001"
-WS_API = "http://128.179.186.221:1234"
+MOCK_API = "http://localhost:6000"
+WS_API = "http://localhost:1234"
 ALERT_DEPTH = 4
 app = Flask(__name__)
 
@@ -50,25 +50,18 @@ def execute_file(path, params):
 
 
 def ask_sophia(genomes):
-    # requests.get(MOCK_API, json=genomes).json()
-    return [
-        {"name": "HIV", "dangerous": 1, "depth": 22},
-        {"name": "CANCER", "dangerous": 1, "depth": 47},
-        {"name": "VIRUS", "dangerous": 1, "depth": 30},
-        {"name": "PLANTE", "dangerous": 0, "depth": 6},
-        {"name": "Human", "dangerous": 0, "depth": 16}
-    ][:len(genomes)]
-
+    return requests.get(MOCK_API, json=genomes).json()
 
 def update_matches():
     genomes = [str(item[0])
                for item in execute_file("sql/all_genomes.sql", [])]
     matches = ask_sophia(genomes)
-    for m in matches:
-        execute_file("sql/create_species.sql",
-                     {"species": m["name"], "dangerous": m["dangerous"], "depth": m["depth"]})
+    for m in matches['species']:
+        if not m["name"] == None:
+            execute_file("sql/create_species.sql",
+                        {"species": m["name"], "dangerous": m["dangerous"], "depth": m["depth"]})
     commit()
-    for (g, m) in zip(genomes, matches):
+    for (g, m) in zip(genomes, matches['species']):
         execute_file("sql/create_match.sql", {"gen": g, "species": m["name"]})
     commit()
 
@@ -118,4 +111,4 @@ def add_samples():
     return "OK add sample"
 
 
-app.run("0.0.0.0")
+app.run("localhost")

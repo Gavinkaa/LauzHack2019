@@ -76,10 +76,10 @@ def analyze():
     return {"species": res}
 
 @app.route('/samples', methods=['POST'])
-def retrieve_samples():
+def add_samples():
     args = request.get_json()
     for k,v in args.items():
         add(root, v[0], k, v[1])
 
 
-app.run ("0.0.0.0")
+app.run ("localhost", port=6000)
