@@ -65,7 +65,7 @@ for name, data in data.items():
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
-def add_message():
+def analyze():
     args = request.get_json()
     res = []
     for sequence in args:
@@ -75,5 +75,11 @@ def add_message():
         else:
             res.append({'name':parent, 'dangerous': 0, 'depth':depth})
     return {"species": res}
+
+@app.route('/samples', methods=['POST'])
+def retrieve_samples():
+    args = request.get_json()
+    for k,v in args.items():
+        add(root, v[0], k, v[1])
 
 app.run ("0.0.0.0")
