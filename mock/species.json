@@ -1,5 +1,6 @@
 {
-    "dromadaire":["GGCTAGGGCCCT", 0],
+    "dromadaire":["GGCTAGGGCCCT", 1],
+    "requin": ["GGCTAGCCT", 1],
     "animal": ["GGCT", 1],
     "human":["ACGT", 0]
 }
