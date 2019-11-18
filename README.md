@@ -84,7 +84,7 @@ The frontend itself was made using Vue, and quite a bit of tailwind CSS for the 
 
 ## Challenges we ran into
 
-One of the challenges was figuring out the necessary granularity to give different services, as well as finding a way to avoid having task blocking other members of the team. We also had a certain amount of imbalance in terms of knowledge, which lead to some tasks taking quite a bit longer than expected as team members wrestled with new bugs.
+One of the challenges was figuring out the necessary granularity to give different services, as well as finding a way to avoid having task blocking other members of the team.
 
 Another point we got stuck on for a while was finding a good way to visualize the pathogen map. Overlaying multiple images is simple in theory, but difficult to integrate with the component based API provided by HTML. We had to cycle through quite a few libraries before finding something that even worked. Even then, we encountered odd cross platform bugs, and had to resort to beautiful workarounds such as hidden images.
 
